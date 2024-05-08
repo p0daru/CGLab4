@@ -17,7 +17,7 @@ const camera = new Three.PerspectiveCamera(
 );
 
 // Setting the initial camera position
-camera.position.z = 15;
+camera.position.z = 12;
 
 // Creating a renderer
 const renderer = new Three.WebGLRenderer();

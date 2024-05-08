@@ -27,22 +27,48 @@ document.body.appendChild(renderer.domElement);
 
 // Loading a texture
 const textureLoader = new Three.TextureLoader();
-const texture = textureLoader.load("textures/task1-2.bmp");
-const topBottomTexture = textureLoader.load("textures/task1-2.bmp");
+const texture = textureLoader.load("textures/task1_2.bmp");
+const topBottomTexture = textureLoader.load("textures/task1_2.bmp");
 
 // Creating and setting materials for the cube (texture for bottom and top)
 const materials = [
-  new Three.MeshBasicMaterial({ color: 0xabdbe3 }), // right side
-  new Three.MeshBasicMaterial({ color: 0xabdbe3 }), // left side
+  new Three.MeshBasicMaterial({
+    color: 0xabdbe3,
+    transparent: true,
+    opacity: 0,
+  }), // right side
+  new Three.MeshBasicMaterial({
+    color: 0xabdbe3,
+    transparent: true,
+    opacity: 0,
+  }), // left side
   new Three.MeshBasicMaterial({ map: topBottomTexture }), // top side
   new Three.MeshBasicMaterial({ map: topBottomTexture }), // bottom side
-  new Three.MeshBasicMaterial({ color: 0xabdbe3 }), // front side
-  new Three.MeshBasicMaterial({ color: 0xabdbe3 }), // back side
+  new Three.MeshBasicMaterial({
+    color: 0xabdbe3,
+    transparent: true,
+    opacity: 0,
+  }), // front side
+  new Three.MeshBasicMaterial({
+    color: 0xabdbe3,
+    transparent: true,
+    opacity: 0,
+  }), // back side
 ];
 
 // Adding the cube to the scene
 const cube = new Three.Mesh(new Three.BoxGeometry(), materials);
 scene.add(cube);
+
+// Creating wireframe geometry for the cube
+const wireframe = new Three.WireframeGeometry(new Three.BoxGeometry());
+
+// Creating material for the wireframe
+const wireframeMaterial = new Three.LineBasicMaterial({ color: 0x000000 });
+
+// Creating the wireframe mesh
+const wireframeCube = new Three.LineSegments(wireframe, wireframeMaterial);
+cube.add(wireframeCube);
 
 // Animation function
 function animate() {
